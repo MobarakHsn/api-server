@@ -1,9 +1,11 @@
+/*
+Copyright © 2023 NAME HERE <EMAIL ADDRESS>
+
+*/
 package main
 
-//func main() {
-//	fmt.Println("Hello")
-//	fmt.Printf("%#v\n\n\n", BookList[1])
-//	fmt.Printf("%#v\n", AuthorList[1])
-//}
+import "api-server/cmd"
 
-// Getting back
+func main() {
+	cmd.Execute()
+}

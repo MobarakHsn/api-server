@@ -1,4 +1,4 @@
-package main
+package data
 
 // Defining Author structure
 type Author struct {
@@ -89,4 +89,39 @@ func GenerateCreds() {
 		"123",
 	}
 	CredentialList[cred.Username] = cred.Password
+}
+
+// This function get the first unused id for Book
+func GetAvailableBookId() int {
+	for i := 1; ; i++ {
+		_, ok := BookList[i]
+		if !ok {
+			return i
+		}
+	}
+}
+
+// This method adds a new Book
+func (book *Book) AddBook() {
+	id := GetAvailableBookId()
+	book.BookId = id
+	AuthorList[book.AuthorId].MyBooks = append(AuthorList[book.AuthorId].MyBooks, *book)
+	BookList[book.BookId] = book
+}
+
+// This function get the first unused id for Author
+func GetAvailableAuthorId() int {
+	for i := 1; ; i++ {
+		_, ok := AuthorList[i]
+		if !ok {
+			return i
+		}
+	}
+}
+
+// This method adds a new Author
+func (author *Author) AddAuthor() {
+	id := GetAvailableAuthorId()
+	author.AuthorId = id
+	AuthorList[id] = author
 }

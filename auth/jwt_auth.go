@@ -1,6 +1,7 @@
-package main
+package auth
 
 import (
+	"api-server/data"
 	"encoding/json"
 	"github.com/dgrijalva/jwt-go"
 	"net/http"
@@ -9,7 +10,7 @@ import (
 
 var mySigningKey = []byte("gimme")
 
-func GenerateToken(cred Credential) (string, error) {
+func GenerateToken(cred data.Credential) (string, error) {
 	token := jwt.New(jwt.SigningMethodHS256)
 	claims := token.Claims.(jwt.MapClaims)
 	claims["username"] = cred.Username
@@ -22,13 +23,13 @@ func GenerateToken(cred Credential) (string, error) {
 	return tokenString, nil
 }
 func LoginHandler(w http.ResponseWriter, r *http.Request) {
-	var cred Credential
+	var cred data.Credential
 	err := json.NewDecoder(r.Body).Decode(&cred)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
 		return
 	}
-	correctPassword, ok := CredentialList[cred.Username]
+	correctPassword, ok := data.CredentialList[cred.Username]
 	if !ok || cred.Password != correctPassword {
 		w.WriteHeader(http.StatusUnauthorized)
 		return
