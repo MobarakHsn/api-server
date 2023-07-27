@@ -131,7 +131,12 @@ curl -X DELETE -H "Authorization: ${TOKEN}" http://localhost:8081/Book/1`
 ```
 curl -X DELETE -H "Authorization: ${TOKEN}" http://localhost:8081/Author/1`
 ```
+-----------------
 
+#### Docker image
+
+- `docker pull mobarak9239/api-server:latest`
+- `docker run -p <local port number>:8081 <image id>`
 
 ----------------
 
